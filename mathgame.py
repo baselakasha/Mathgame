@@ -16,7 +16,17 @@ def main():
 	for i in data: # check if database table is empty
 		x=x+1
 	if x==0: # if empty (first open)
-		name = input("[+] Please Enter your name : ") 
+		ask=True
+		while ask:
+		    try:
+		    	name = input("[+] Please Enter your name : ")
+		    	if name=="" or len(name)==0:
+		    		print("Please Enter vaild value !")
+		    	else:
+		    		ask=False	    		
+		    except valueError:
+		    	print("Please Enter vaild value")
+		    	askName()
 		print("\n___________________________________________________________\n")
 		c.execute("INSERT INTO data VALUES(?,?)",(name,"0")) # set name in database 
 		db.commit()  
@@ -65,12 +75,7 @@ def main():
 			print("Oops ! False Answer!")
 			userAgain=input("[+] Play Again (y,n) : ").lower()
 			if userAgain=="n":
-				print("god bye !")
+				print("Good bye !")
+				db.close()
 				lose=True
 main()
-
-
-
-
-
-
